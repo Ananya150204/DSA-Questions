@@ -1,0 +1,69 @@
+Given two weights of a and b units, in how many different ways can you achieve a weight of d units using only the given weights? 
+Any of the given weights can be used any number of times (including 0 number of times).
+Two ways are considered different if either the number of times a is used or a number of times b is used is different in the two ways.
+
+1 <= T <= 10^5
+1 <= a < b <= 10^9
+0 <= d <= 10^9
+
+Code:
+
+#include<bits/stdc++.h>
+using namespace std;
+
+long long int extendedGCD(long long int a, long long int b, long long int& x, long long int& y){
+    if (b == 0){
+        x = 1;
+        y = 0;
+        return a; // Clearly if b = 0 then gcd(a,b) = a;
+    }
+    long long int x1;
+    long long int y1;
+    long long int g = extendedGCD(b, a%b, x1, y1);
+    x = y1; // Remember this
+    y = x1 - (a/b)*y1; // Remember this
+    return g;
+}
+int main(){
+    
+    // write your code here
+    long long int t;
+    cin >> t;
+    while (t--){
+        long long int a;
+        long long int b;
+        long long int d;
+        cin >> a;
+        cin >> b;
+        cin >> d;
+        long long int x = 0;
+        long long int y = 0;
+        long long int temp = b;
+        b = a;
+        a = temp;
+        // Need to solve the equation ax+by = d;
+        long long int g = extendedGCD(a,b,x,y);
+        if (d%g == 0){
+             x = x*d/g; // extendedGCD gives solution of ax+by = g 
+             y = y*d/g; // Need to find solution of ax+by = d
+
+            long long int l,r; // To find range of values of k such that x + kb/g and y - ka/g satisfy the equation
+
+           
+
+            l = (long long int)ceil(double(-x)*g/b); // Crucial to convert long long int x to double x
+            r = (long long int)floor(double(y)*g/a);
+
+            if (l > r){
+                cout << 0 << endl;
+            }
+            else {
+                cout << r-l+1 << endl;
+            }
+        }
+        else {
+            cout << 0 << endl;
+        }
+    }
+    return 0;
+}
