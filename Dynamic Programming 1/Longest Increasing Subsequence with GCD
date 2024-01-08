@@ -1,0 +1,22 @@
+Vanya has been given an integer array A of size N. Now, she needs to find the number of increasing sub-sequences of this array with length ≥1 and GCD=1. A sub-sequence of an array is obtained by deleting some (or none) elements and maintaining the relative order of the rest of the elements. As the answer may be large, print it Modulo 109+7
+
+Input Format:
+
+The first line contains a single integer N denoting size of array A. The next line contains N space separated integers denoting the elements of array A
+Output Format:
+
+Print the required answer Modulo 10^9+7 on a single line.
+Constraints:
+
+1≤N≤500
+
+1≤A[i]≤100
+
+Sample Input
+3
+1 2 3
+Sample Output
+5
+Explanation
+Here, the increasing sequences with GCD=1 are:
+(1), (1,2), (1,3), (2,3), (1,2,3).
