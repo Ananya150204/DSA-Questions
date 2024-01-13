@@ -1,0 +1,83 @@
+Given the following :
+Integer array A of size N
+Q queries in which each query consists of two integers indx,val
+
+Task is to determine the minimum index l such that:
+1. l >= indx
+2.bitwise OR of all the numbers from indx to l is greater than or equal to val
+
+If no such index exists, print -1.
+Note: 1 based indexing is used.
+
+Input :
+N - size of array
+Next line has N space separated integers, representing array A.
+Next line, Q - number of queries
+Next Q lines contain 2 space separated integers representing each query
+
+Output :
+Print Q space separated integers representing the answer to each query.
+
+Constraints :
+1 <= N,Q <= 10^5
+0 <= A_i,val <= 2^20
+1 <= indx <= N.
+
+
+
+Code :
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+vector<int> solve(int N, vector<int> A, int Q, vector<vector<int>> queries){
+vector<int> answers(Q,-1);
+// Precompute the suffix OR values from the end of the array
+vector<int> suffixOR(N);
+suffixOR[N-1] = A[N-1];
+
+for (int i = N-2; i >= 0; i--){
+  suffixOR[i] = suffixOR[i+1] | A[i];
+}
+for (int q = 0; q < Q; q++){
+  int indx = queries[q][0]-1;
+  int val = queries[q][1];
+  // If the suffix OR at indx is already less than val, then no such index exists.
+        
+  if (suffixOR[indx] < val){
+    answers[q] = -1;
+    continue;
+  }
+// Find the smallest index i such that the OR from indx to i is >= val.
+
+int currentOR = 0;
+for (int i = index; i < N; i++){
+  currentOR |= A[i];
+// Once the currentOr meets or exceeds val, we found our index
+  if (currentOR >= val){
+    answers[q] = i+1; // Convert to one based indexing
+    break;
+  }
+}
+}
+return answers;
+}
+int main() {
+int N, Q;
+std::cin >> N;
+std::vector<int> A(N);
+for (int &a : A) {
+std::cin >> a;
+}
+std::cin >> Q;
+std::vector<std::pair<int, int>> queries(Q);
+for (auto &query : queries) {
+    std::cin >> query.first >> query.second;
+}
+
+std::vector<int> answers = solve(N, A, Q, queries);
+for (int answer : answers) {
+    std::cout << answer << (answer != -1 ? " " : "\n");
+}
+return 0;}
