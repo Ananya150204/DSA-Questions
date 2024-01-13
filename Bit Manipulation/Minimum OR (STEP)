@@ -71,9 +71,9 @@ for (int &a : A) {
 std::cin >> a;
 }
 std::cin >> Q;
-std::vector<std::pair<int, int>> queries(Q);
+std::vector<vector<int>> queries(Q,vector<int>(2));
 for (auto &query : queries) {
-    std::cin >> query.first >> query.second;
+    std::cin >> query[0] >> query[1];
 }
 
 std::vector<int> answers = solve(N, A, Q, queries);
