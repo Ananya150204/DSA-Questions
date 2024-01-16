@@ -35,3 +35,22 @@ Expected Auxiliary Space: O(1)
 
 Constraints:
 1 ≤ m, n ≤ 100
+
+Idea : As the auxiliary space is O(1), iterative DP cannot be used. Recursion is obvious. The prob-
+lem for me was that how to keep track of the index we are at as I form the sequence. Here index can
+be easily handled by n - the number of elements in the array. Note the first if condition carefully.
+
+Code :
+
+int numberSequence(int m, int n){
+        // code here
+        if (m < n){
+            return 0;
+        }
+        if (n==0){
+            return 1;
+        }
+        int t = numberSequence(m/2,n-1); // If n-th element is m, (n-1)-th can be atmost m/2
+        int nt = numberSequence(m-1,n); // n-th element is less than m
+        return t+nt;
+    }
