@@ -24,6 +24,10 @@ Output: -1
 Explanation: The two people at the party both
 know each other. None of them is a celebrity.
 
+Idea : res stores the answer. Start with the 0-th person. If he knows i-th person ,then he 
+cannot be the celebrity. Now check for the i-th person. Continue this loop. At the end of the
+loop check if res is indeed a celebrity
+
 Code :
 
 class Solution 
