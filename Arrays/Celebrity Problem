@@ -32,6 +32,21 @@ class Solution
     //Function to find if there is a celebrity in the party or not.
     int celebrity(vector<vector<int> >& M, int n) 
     {
+       int res = 0;
+        for (int i = 1; i < n; i++){
+            if (M[res][i] == 1){
+                res = i;
+            }
+        }
+        // Check whether res is indeed the celebrity
         
+        for (int i = 0; i < n; i++){
+            if (i != res){
+                if (M[res][i] == 1 || M[i][res] == 0){
+                    return -1;
+                }
+            }
+        }
+        return res; 
     }
 };
