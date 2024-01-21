@@ -1,0 +1,72 @@
+Vertex cover of an undirected graph is a list of vertices such that every vertex not in the vertex cover shares their every edge with the vertices in the vertex cover. In other words, for every edge in the graph, atleast one of the endpoints of the graph should belong to the vertex cover. You will be given an undirected graph G, and your task is to determine the smallest possible size of a vertex cover.
+
+Example 1:
+
+Input:
+N=5
+M=6
+edges[][]={{1,2}
+           {4, 1},
+           {2, 4},
+           {3, 4},
+           {5, 2},
+           {1, 3}}
+Output:
+3
+Explanation:
+{2, 3, 4} forms a vertex cover
+with the smallest size.
+Example 2:
+
+Input:
+N=2
+M=1
+edges[][]={{1,2}} 
+Output: 
+1 
+Explanation: 
+Include either node 1 or node 2
+in the vertex cover.
+Your Task:  
+You don't need to read input or print anything. Your task is to complete the function vertexCover() which takes the edge list and an integer n for the number of nodes of the graph as input parameters and returns the size of the smallest possible vertex cover.
+
+Expected Time Complexity: O(M*2^N)
+Expected Auxiliary Space: O(N^2)
+
+ Constraints:
+1 <= N <= 16
+1 <= M <= N*(N-1)/2
+1 <= edges[i][0], edges[i][1] <= N
+
+
+Idea : The approach used in this code is a brute-force method. It systematically explores all possible combinations of vertices to determine which sets can form a valid vertex cover. This is done through recursion and backtracking. The algorithm essentially does a depth-first search on the state space tree, where each state represents a subset of vertices chosen to be in the vertex cover. The time complexity of this approach is O(2^n), making it impractical for large graphs.
+
+However, this method guarantees finding the minimum vertex cover since it exhaustively checks all possibilities. For small graphs, this method works well.
+
+Code :
+
+int ans;
+        void helper (int index, int n, vector<pair<int, int>> &edges, set<int> &st){
+            // Base case
+            if (index > n){
+                for (auto it:edges){
+                    if (st.find(it.first) == st.end() && st.find(it.second) == st.end()){
+                        return;
+                    }
+                }
+                    ans = min((int)st.size(),ans);
+                    return;
+                }
+                helper(index+1,n,edges,st);
+                st.insert(index);
+                helper(index+1,n,edges,st);
+                st.erase(index);
+            }
+        
+        int vertexCover(int n, vector<pair<int, int>> &edges) {
+                // code here
+                ans = n;
+                set<int> st;
+                helper(1,n,edges,st);
+                return ans;
+            }
