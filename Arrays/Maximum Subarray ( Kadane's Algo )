@@ -1,0 +1,22 @@
+Given an integer array nums, find the subarray with the largest sum, and return its sum.
+
+Solution :
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        // Kadane's algo 
+        int n = nums.size();
+        int sum = 0;
+        int maxi = INT_MIN; // Need to compare sum with smth
+       for (int i = 0; i < n; i++){
+            sum += nums[i];
+            if (sum > maxi){
+                maxi = sum;
+            }
+            if (sum < 0){
+                sum = 0;
+            }
+       }
+       return maxi; 
+    }
+};
