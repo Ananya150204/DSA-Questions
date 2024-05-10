@@ -1,0 +1,83 @@
+Problem statement
+You are given a tree(root 0) with N vertex having N - 1 edges. You are also given an array ‘QUERY’ of size ‘Q’, where each query consists of an integer that denotes a node. You have to print the xor of all the values of nodes in the sub-tree of the given node.
+
+Constraints :
+1 <= T <= 10
+0 <= N, Q <= 10^5 
+0 <= QUERY[i] < N
+
+Time Limit: 1 sec
+Sample Input 1:
+1
+4 3
+0 1
+0 2
+2 3
+0 2 3
+Sample Output 1:
+0 1 3
+Explanation For Sample Output 1 :
+For the first test case :
+The tree for the test case will be:  
+
+
+For query 1: Xor will be: 0 ^ 1 ^ 2 ^ 3 = 0
+For query 2: Xor will be: 2 ^ 3 = 1
+For query 3: Xor will be: 3 = 3
+Sample Input 2 :
+1
+7 4
+0 1
+0 2
+1 3
+1 4
+2 5
+2 6
+0 1 4 5
+Sample Output 2 :
+7 6 4 5
+Explanation For Sample Output 2 :
+For the first test case :
+The tree for the test case will be:  
+
+
+For query 1: Xor will be: 0 ^ 1 ^ 2 ^ 3 ^ 4 ^ 5 ^ 6= 7
+For query 2: Xor will be: 1 ^ 3 ^ 4 = 6
+For query 3: Xor will be: 4 = 4
+For query 4: Xor will be: 5 = 5    
+}
+Key Ideas : Honestly, it is a straightforward question. U have to initialise the xorAns correctly
+in dfs. Also the sole reason of passing parent in dfs is to ensure that we can check arr[i] != 
+parent. Still pretty normal DFS. Obviously, the return type of dfs must be void and changes must
+be made in the xorAns array.
+
+Code :
+void dfs(int root, int parent, vector<vector<int>>& adjList, vector<int>& xorAns){
+    vector<int> arr = adjList[root];
+    xorAns[root] = root; // Initialize // Forgot
+    int s = arr.size();
+    for (int i = 0; i < s; i++){
+        if (arr[i] != parent){ // Forgot
+            dfs(arr[i],root,adjList,xorAns);
+            xorAns[root] ^= xorAns[arr[i]];
+        }
+    }
+}
+vector<int> XORquery(int n, vector<vector<int>> &edges, int q, vector<int> &query) {
+    // Write your code here.
+    vector<vector<int>> adjList(n);
+    int sz = edges.size();
+    for (int i = 0; i < sz; i++){
+        adjList[edges[i][0]].push_back(edges[i][1]);
+        adjList[edges[i][1]].push_back(edges[i][0]);
+    }
+    vector<int> xorAns(n,0);
+    dfs(0,-1,adjList,xorAns);
+    vector<int> ans(q,0);
+    for(int i = 0; i < q; i++){
+        int queryNum = query[i];
+        ans[i] = xorAns[queryNum];
+    }
+    return ans;
+
+}
