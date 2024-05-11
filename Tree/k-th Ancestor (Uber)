@@ -1,0 +1,64 @@
+ He gives him a tree with N nodes numbered from 0 to N - 1 in the form of a parent array parent where parent[i] is the parent of the ith node. The root of the tree is node 0. Now Ninja has to find the kth ancestor of a given node. The kth ancestor of a tree node is the kth node in the path from that node to the root node.
+
+Constraints:
+1 <= T <= 10
+1 <= k <= N <= 5 * 10 ^ 4
+0 <= node < N
+0 <= parent[i] < N
+
+Time limit: 1 second
+Sample Input 1:
+2
+7
+-1 0 0 1 1 2 2
+3 1
+7
+-1 0 0 1 1 2 2
+5 2
+Sample Output 1:
+1
+0
+Sample Input 2:
+2
+7
+-1 0 0 1 1 2 2
+4 2
+7
+-1 0 0 1 1 2 2
+6 1
+Sample Output 2:
+ 0
+ 2
+
+Key Idea : Start DFS from the given node itself and keep reducing k. When k == 0, we get the
+ans_node. Also make a directed graph from child to parent. (Why ?)
+Code :
+bool dfs(int node, int k, vector<vector<int>>& adjList, int& ans_node){
+    if (k==0){
+        ans_node = node;
+        return true;
+    }
+    vector<int> adj = adjList[node];
+    for (int ele : adj){
+        if (dfs(ele,k-1,adjList,ans_node) == true){
+            return true;
+        }
+    }
+    return false;
+}
+
+int kthAncestor(int n, vector<int> & parent, int node, int k)
+{
+    // Write your code here.
+    vector<vector<int>> adjList(n);
+
+    for (int i = 0; i < n; i++){
+        if (parent[i] != -1){
+            //adjList[parent[i]].push_back(i);
+            adjList[i].push_back(parent[i]);
+        }
+    }
+    int ans_node = -1;
+    dfs(node,k,adjList,ans_node);
+    return ans_node;
+}
