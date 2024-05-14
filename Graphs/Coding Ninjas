@@ -1,0 +1,81 @@
+Given a NxM matrix containing Uppercase English Alphabets only. Your task is to tell if there is a path in the given matrix which makes the sentence “CODINGNINJA” .
+There is a path from any cell to all its neighbouring cells. A neighbour may share an edge or a corner.
+Constraints :
+1 <= T <= 10
+1 <= N <= 1000
+1 <= M <= 1000
+Sample Input :
+1
+2 11
+CXDXNXNXNXA
+XOXIXGXIXJX
+Sample Output :
+1
+Code :
+#include<bits/stdc++.h>
+using namespace std;
+bool dfs(vector<vector<char>>& board, vector<vector<bool>>& isVis,
+string word, int i, int j, int index, int n, int m){
+    if (index == word.size()){
+        return true;
+    }
+    if (i < 0 || i >= n || j < 0 || j >= m || isVis[i][j] == true || board[i][j] != word[index]){
+        return false;
+    }
+    isVis[i][j] = true;
+    vector <int> xdir = {0, 1, 1, 1, 0, -1, -1, -1};
+    vector<int> ydir = {1, 1, 0, -1, -1, -1, 0, 1};
+
+    for (int a = 0; a < 8; a++){
+        int x = i+xdir[a];
+        int y = j+ydir[a];
+
+        if (dfs(board,isVis,word,x,y,index+1,n,m)){
+            return true;
+        }
+    }
+    isVis[i][j] = false; // Very imp so that it can be used in fresh iterations
+    return false;
+}
+int main(){
+    // write your code here
+    int t;
+    cin >> t;
+    string str = "CODINGNINJA";
+    while (t--){
+        int n;
+        int m;
+        cin >> n >>m;
+        vector<vector<char>> board(n, vector<char>(m));
+    
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < m; ++j) {
+                cin >> board[i][j];
+            }
+        }
+        bool found = false;
+        vector<vector<bool>> isVis(n,vector<bool>(m,0));
+        for (int i = 0; i < n; i++){
+            for (int j = 0; j < m; j++){
+                if (board[i][j] == str[0]){
+                    found = dfs(board,isVis,str,i,j,0,n,m);
+                    if (found){
+                        break;
+                    }
+                }
+            }
+           if (found){
+                break;
+            } 
+        }
+        if(found){
+            cout << 1 << endl;
+        }
+        else {
+            cout << 0 << endl;
+        }
+
+    }
+    return 0;
+}
+
