@@ -1,0 +1,82 @@
+Given a directed graph, check whether the graph contains a cycle or not. Your function should return true if the given graph contains at least one cycle, else return false.
+
+Constraints:
+1 <= T <= 10
+1 <= V <= 10^3
+0 <= E <= 10^3
+0 <= A, B < V
+
+Time Limit: 1 sec
+Sample Input 1:.
+2
+4 4
+0 1
+1 2
+2 3
+3 0
+3 3
+1 0
+1 2
+0 2
+Sample Output 1:
+true
+false
+Explanation for Sample Input 1:
+In the first case,
+From node 0 we can reach 0 again by following this sequence of nodes in the path: 0,1,2,3,0.
+
+In the second case,
+There is no cycle in the given graph.
+Example
+
+Sample Input 2:
+2
+3 2
+0 1
+0 2
+3 3
+1 1
+0 2
+1 2
+Sample Output 2:
+false
+true
+
+Code :
+bool dfs (int node, vector<vector<int>>& adjList, vector<bool>& isVis, vector<bool>&
+inRec){
+	isVis[node] = true;
+	inRec[node] = true;
+	for (int ele : adjList[node]){
+		if (isVis[ele] == false){
+			if (dfs(ele,adjList,isVis,inRec) == true){
+				return true;
+			}
+		}
+		else if (inRec[ele] == true){
+			return true;
+		}
+	}
+	inRec[node] = false;
+	return false;
+}
+bool isCyclic(vector<vector<int>>& edges, int v, int e)
+{
+	// Write your code here
+	vector<vector<int>> adjList(v);
+	
+	for (int i = 0; i < e; i++){
+		adjList[edges[i][0]].push_back(edges[i][1]);
+	}
+	vector<bool> isVis(v,0);
+	vector<bool> inRec (v,0);
+
+	for (int i = 0; i < v; i++){
+		if (isVis[i] == false && dfs(i,adjList,isVis, inRec) == true){
+			return true;
+		}
+	}
+	return false;
+}
+
+
