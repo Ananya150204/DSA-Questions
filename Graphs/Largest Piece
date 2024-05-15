@@ -1,0 +1,56 @@
+Its Gary's birthday today and he has ordered his favourite square cake consisting of '0's and '1's . But Gary wants the biggest piece of '1's and no '0's . A piece of cake is defined as a part which consist of only '1's, and all '1's share an edge with eachother on the cake. Given the size of cake N and the cake , can you find the size of the biggest piece of '1's for Gary ?
+
+Constraints:
+1 <= T <= 10
+1 <= N <= 1000
+Sample Input :
+1
+2
+11
+01
+Sample Output :
+3
+
+Code :
+#include <bits/stdc++.h>
+using namespace std;
+
+int dfs(vector<vector<char>>& cake, vector<vector<bool>>& isVis, int i, int j) {
+    if (i < 0 || i >= cake.size() || j < 0 || j >= cake.size() || isVis[i][j] || cake[i][j] == '0') {
+        return 0;
+    }
+    isVis[i][j] = true;
+    int size = 1;
+    size += dfs(cake, isVis, i + 1, j);
+    size += dfs(cake, isVis, i, j + 1);
+    size += dfs(cake, isVis, i - 1, j);
+    size += dfs(cake, isVis, i, j - 1);
+    return size;
+}
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<vector<char>> cake(n, vector<char>(n));
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                cin >> cake[i][j];
+            }
+        }
+        
+        vector<vector<bool>> isVis(n, vector<bool>(n, false));
+        int maxi = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (!isVis[i][j] && cake[i][j] == '1') {
+                    maxi = max(maxi, dfs(cake, isVis, i, j));
+                }
+            }
+        }
+        cout << maxi << endl;
+    }
+    return 0;
+}
