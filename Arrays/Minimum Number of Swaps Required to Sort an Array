@@ -1,0 +1,42 @@
+You have been given an array 'ARR' of 'N' distinct elements.
+
+Your task is to find the minimum no. of swaps required to sort the array.
+
+For example:
+For the given input array [4, 3, 2, 1], the minimum no. of swaps required to sort the array is 2, i.e. swap index 0 with 3 and 1 with 2 to form the sorted array [1, 2, 3, 4].
+Constraints:
+1 <= T <= 100
+1 <= N <= 1000
+0 <= ARR[i] <= 10 ^ 9
+
+Where 'ARR[i]' is the value of the input array elements.
+
+Time Limit: 1 sec
+
+Code :
+int minSwaps(vector<int> &arr)
+{
+	// Write your code here.
+	int n = arr.size();
+	vector<pair<int,int>> v(n);
+
+	for (int i = 0; i < n; i++){
+		v[i] = {arr[i],i};
+	}
+	sort (v.begin(),v.end());
+
+	int count = 0;
+
+	for (int i = 0; i < n; i++){
+		if (i == v[i].second){
+			int a = 1;
+		}
+		else {
+			count ++;
+			swap(v[i],v[v[i].second]);
+			i--;  // Very important step bcoz after swapping we need to check that the element getting swapped 
+			// is at the right place
+		}
+	}
+	return count;
+}
