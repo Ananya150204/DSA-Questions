@@ -1,0 +1,49 @@
+You are given 2 numbers (n , m); the task is to find n√m (nth root of m).
+Idea : Regular exponentiation may lead to overflow. So if product exceeds m, u break there.
+Code :
+int power (int mid, int n, int m){
+	    unsigned long long int prod = 1;
+	    bool flag = true;
+	    for (int i = 0; i < n; i++){
+	        prod *= mid;
+	        if (prod > m){
+	            flag = false;
+	            break;
+	        }
+	    }
+	    if (flag == false){
+	        return -1;
+	    }
+	    if (flag == true && prod == m){
+	        return 1;
+	    }
+	    if (flag == true && prod < m){
+	        return 2;
+	    }
+	    
+	    
+	}
+	int NthRoot(int n, int m)
+	{
+	    // Code here.
+	    int start = 0;
+	    int end = m;
+	    int mid;
+	    int ans = -1;
+	    while (start <= end){
+	        mid = start + (end-start)/2;
+	        int prod = 1;
+	        prod = power(mid,n,m);
+	        
+	        if (prod == 1){
+	            return mid;
+	        }
+	        else if (prod == 2){
+	            start = mid+1;
+	        }
+	        else {
+	            end = mid - 1;
+	        }
+	    }
+	    return ans;
+	}  
