@@ -1,0 +1,4 @@
+In BS on answers try to keep the initial difference between low and high as small as possible.
+Do not keep low as 0 and high as some sum (maybe) blindly.
+Check if low is pointing to the impossible answer initially. If it is, after binary search it will
+point to the correct answer finally. Similar comment for high
