@@ -1,0 +1,110 @@
+You are given an integer array bloomDay, an integer m and an integer k.
+You want to make m bouquets. To make a bouquet, you need to use k adjacent flowers from the garden.
+The garden consists of n flowers, the ith flower will bloom in the bloomDay[i] and then can be used in exactly one bouquet.
+Return the minimum number of days you need to wait to be able to make m bouquets from the garden. If it is impossible to make m bouquets return -1.
+My code :
+class Solution {
+public:
+
+    bool isPossible (vector<int> bloomDay, int m, int k, int mid){
+        int count = 0;
+        int numBou = 0;
+        int time = 0;
+        for (int i = 0; i < bloomDay.size(); i++){
+            time = max(time,bloomDay[i]);
+            if (time > mid){
+                count = 0;
+                time = 0;
+                continue;
+            }
+            count ++;
+            if (count == k){
+                numBou = numBou + 1;
+                count = 0;
+                if (numBou == m){
+                    return true;
+                }
+            }
+        }
+        if (time <= mid && numBou >= m){
+            return true;
+        }
+        return false;
+    }
+    int minDays(vector<int>& bloomDay, int m, int k) {
+        int start = 0;
+        int n = bloomDay.size();
+        // if (n < m*k){
+        //     return -1;
+        // }
+        //sort (bloomDay.begin(),bloomDay.end());
+        int end = 0;
+        for (int i = 0; i < n; i++){
+            end = max(end,bloomDay[i]);
+        }
+        int mid;
+        int ans = -1;
+        while (start <= end){
+            mid = start + (end - start)/2;
+            if (isPossible(bloomDay,m,k,mid)){
+                ans = mid;
+                end = mid - 1;
+            }
+            else {
+                start = mid + 1;
+            }
+        }
+        return ans;
+    }
+};
+
+Better Code :
+class Solution {
+public:
+
+    bool isPossible (vector<int> bloomDay, int m, int k, int mid){
+        int count = 0;
+        int numBou = 0;
+        int time = 0;
+        for (int i = 0; i < bloomDay.size(); i++){
+            if (bloomDay[i] <= mid){
+                count ++;
+            }
+            else {
+                numBou += (count/k);
+                count = 0;
+            }
+        }
+        numBou += (count/k);
+        if (numBou >= m){
+            return true;
+        }
+        return false;
+    }
+    int minDays(vector<int>& bloomDay, int m, int k) {
+        int start = INT_MAX;
+        int n = bloomDay.size();
+        if (n < 1ll*m*1ll*k){
+            return -1;
+        }
+        
+        int end = 0;
+        for (int i = 0; i < n; i++){
+            start = min(start,bloomDay[i]);
+            end = max(end,bloomDay[i]);
+        }
+        int mid;
+        int ans = -1;
+        while (start <= end){
+            mid = start + (end - start)/2;
+            if (isPossible(bloomDay,m,k,mid)){
+                ans = mid;
+                end = mid - 1;
+            }
+            else {
+                start = mid + 1;
+            }
+        }
+        return start;
+    }
+};
