@@ -1,0 +1,58 @@
+Given an array arr of positive integers sorted in a strictly increasing order, and an integer k.
+Return the kth positive integer that is missing from this array.
+Idea behind O(n) : Think that there were no elements in the array. So ur kth +ve integer will be k.
+Now consider k < arr[0]. U can do it. Now consider an integer that is there in the array and is
+less than k. This int extends our search space for k. If k = 5 and arr = [2], kth missing no is 6.
+(5+1). So just extend this.
+Code :
+class Solution {
+public:
+    int findKthPositive(vector<int>& arr, int k) {
+        int n = arr.size();
+        if (k < arr[0]){
+            return k;
+        }
+        for (int i = 0; i < n; i++){
+            if (arr[i] <= k){
+                k = k + 1;
+            }
+            else {
+                break;
+            }
+        }
+        return k;
+    }
+};
+Idea behind O(log n): Consider k < arr[0]. U can do it manually. Now number of missing numbers
+till a particular index is arr[ind]-ind-1; Ur end is most likely incorrect. So after bs it should
+be closer to correct.
+Code :
+class Solution {
+public:
+    int findKthPositive(vector<int>& arr, int k) {
+        if (k < arr[0]){
+            return k;
+        }
+        int n = arr.size();
+        int start = 0;
+        int end = n-1;
+        while (start <= end){
+            int mid = start + (end-start)/2;
+            int missing = arr[mid]-mid-1;
+            if (missing < k){
+                start = mid+1;
+            }
+            else {
+                end = mid-1;
+            }
+
+        }
+        int missing = arr[end] - end - 1;
+        int more = k - missing;
+        return arr[end]+more; 
+    }
+};
+
+Idea behind O(log n)* : Do not consider k < arr[0] separately. In such a case u may get end as
+-1. Note that we return arr[end] + more = arr[end] + k - missing = arr[end] + k - arr[end] + end +
+1 = k + end + 1. So even if end == -1, it is fine.
