@@ -68,7 +68,7 @@ public:
             else {
                 start = mid1 + 1;
             }
-            cout << endl;
+            //cout << endl;
         }
         return 0;
     }
