@@ -1,0 +1,54 @@
+Given a row wise sorted matrix of size R*C where R and C are always odd, find the median of the matrix.
+Input:
+R = 3, C = 3
+M = [[1, 3, 5], 
+     [2, 6, 9], 
+     [3, 6, 9]]
+Output: 5
+Explanation: Sorting matrix elements gives 
+us {1,2,3,3,5,6,6,9,9}. Hence, 5 is median. 
+
+Code :
+int countSmallerEqualTo(vector<vector<int>> &matrix, int middle){
+        int n = matrix.size();
+        int m = matrix[0].size();
+        int count = 0;
+        for (int i = 0; i < n; i++){
+            int start = 0;
+            int end = m-1;
+            while (start <= end){
+                int mid = start + (end-start)/2;
+                if (matrix[i][mid] > middle){
+                    end = mid - 1;
+                }
+                else {
+                   start = mid + 1; 
+                }
+            }
+            count = count + start;
+        }
+        return count;
+    }
+    int median(vector<vector<int>> &matrix, int R, int C){
+        // code here
+        int req = (R*C)/2;
+        int start = INT_MAX;
+        int end = INT_MIN;
+        int ans = -1;
+        for (int i = 0; i < R; i++){
+            start = min(start,matrix[i][0]);
+            end = max(end,matrix[i][C-1]);
+        }
+        while (start <= end){
+            int mid = start + (end-start)/2;
+            if (countSmallerEqualTo(matrix,mid) <= req){
+                start = mid + 1;
+            }
+            else {
+                ans = mid;
+                end = mid-1;
+            }
+        }
+        return ans;
+        
+    }
