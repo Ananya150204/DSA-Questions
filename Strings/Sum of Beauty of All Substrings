@@ -1,0 +1,61 @@
+The beauty of a string is the difference in frequencies between the most frequent and least frequent characters.
+For example, the beauty of "abaacc" is 3 - 1 = 2.
+Given a string s, return the sum of beauty of all of its substrings.
+
+Code : (TLE)(56/57)
+class Solution {
+public:
+
+    int beauty(string s, int i, int j, vector<int>alpha){
+        for (int k = i; k <= j; k++){ // k = j bhi check karna hoga
+            alpha[s[k]-'a'] = alpha[s[k]-'a'] + 1;
+        }
+      
+        int maxi = INT_MIN;
+        int mini = INT_MAX;
+        for (int i = 0; i < 26; i++){
+            maxi = max(maxi,alpha[i]);
+            if (alpha[i] != 0 && mini > alpha[i]){
+                mini = alpha[i];
+            }
+        }
+        return maxi - mini;
+    }
+    
+    int beautySum(string s) {
+        int n = s.size();
+        int sum = 0;
+        for (int i = 0; i < n; i++){
+            vector<int>alpha(26,0);
+            for (int j = i+1; j < n; j++){
+              sum = sum + beauty(s,i,j,alpha);
+            }
+        }
+        
+        return sum;
+    }
+};
+
+Code :
+class Solution {
+public:
+
+    int beautySum(string s) {
+        int n = s.size();
+        int sum = 0;
+        for (int i = 0; i < n; i++){
+            unordered_map<char,int> my;
+            for (int j = i; j < n; j++){
+              my[s[j]]++;
+              int maxFreq = 0;
+              int minFreq = INT_MAX;
+              for (auto it : my){
+                maxFreq = max(maxFreq, it.second);
+                minFreq = min(minFreq, it.second);
+              }
+              sum = sum + maxFreq - minFreq;
+            }
+        }
+        return sum;
+    }
+};
