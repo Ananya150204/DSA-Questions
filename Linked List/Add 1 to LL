@@ -1,0 +1,93 @@
+A number N is represented in Linked List such that each digit corresponds to a node in linked list. You need to add 1 to it.
+Code : (Brute) TC : O(2*N) SC : O(N)
+LinkedListNode<int>* addOneToList(LinkedListNode<int> *head)
+{
+    //Write your code here
+    LinkedListNode<int>* temp = head;
+    vector<int> v;
+    while (temp->next != nullptr){
+        v.push_back(temp->data);
+        temp = temp->next;
+    }
+    int n = v.size();
+    if (v[n-1] != 9){ // 998
+        temp = head;
+        while (temp->next->next != nullptr){
+            temp = temp->next;
+        }
+        temp->data = temp->data + 1;
+        return head;
+    }
+    else {
+        int i = n-1;
+        while (i >= 0 && v[i] == 9){
+            v[i] = 0;
+            i --;
+        }
+        if (i == -1){ // 999
+            LinkedListNode<int>* h = new LinkedListNode<int>(1);
+            LinkedListNode<int>* t = h;
+            for (int j = 0; j < n; j++){
+                temp = new LinkedListNode<int>(0);
+                t->next = temp;
+                t = t->next;
+            }
+            temp = new LinkedListNode<int>(-1);
+            t->next = temp;
+            return h;
+        }
+        else { // 1199
+            v[i] = v[i] + 1;
+            temp = head;
+            int k = 0;
+            while (temp->next != nullptr){
+                temp->data = v[k++];
+                temp = temp->next;
+            }
+            return head;
+        }
+
+    }
+    return head;
+}
+Idea about optimal : Reverse , add and reverse
+Code : (Recursive)
+int helper (LinkedListNode<int> *head){ // Returns carry.
+    if (head == nullptr){
+        return 1; // As we r adding 1
+    }
+    int carry = helper(head->next);
+    head->data = head->data + carry;
+    if (head->data < 10){
+        return 0;
+    }
+    head->data = 0;
+    return 1;
+}
+LinkedListNode<int>* addOneToList(LinkedListNode<int> *head)
+{
+    //Write your code here
+    LinkedListNode<int>* temp = head;
+    while (temp->next->next != nullptr){
+        temp = temp->next;
+    }
+    temp->next = nullptr;
+    temp = head;
+    int carry = helper(temp);
+    if (carry == 1){
+        LinkedListNode<int>* newNode = new LinkedListNode<int>(1);
+        newNode->next = head;
+        temp = newNode;
+        while (temp->next != nullptr){
+            temp = temp->next;
+        }
+        temp->next = new LinkedListNode<int>(-1);
+        return newNode;
+    }
+    temp = head;
+    while (temp->next != nullptr){
+        temp = temp->next;
+    }
+    temp->next = new LinkedListNode<int>(-1);
+    return head;
+}
