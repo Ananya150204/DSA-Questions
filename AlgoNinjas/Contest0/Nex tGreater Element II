@@ -1,0 +1,34 @@
+You are given a circular array 'a' of length 'n'.
+A circular array is an array in which we consider the first element is next of the last element. That is, the next element of 'a[n - 1]' is 'a[0]'.
+Find the Next Greater Element(NGE) for every element.
+The Next Greater Element for an element 'x' is the first element on the right side of 'x' in the array, which is greater than 'x'.
+If no greater elements exist to the right of 'x', consider the next greater element as -1.
+
+Code :
+#include <stack>
+vector<int> nextGreaterElementII(vector<int>& a) {
+    // Write your code here.
+    int n = a.size();
+    vector<int> nge(n);
+    stack<int> s;
+    // nge will be right of the ele. So start from the end.
+    for (int i = 2*n-1; i >= 0; i--){ 
+        // stack ensures elements are in increasing order from
+        // top to bottom.
+        while (!s.empty() && s.top() <= a[i%n]){
+            s.pop();
+        }
+        if (i < n){
+            if (!s.empty()){
+                nge[i] = s.top();
+            }
+            else {
+                nge[i] = -1;
+            }
+        }
+        s.push(a[i%n]);
+    }
+    return nge;
+}
+
+
