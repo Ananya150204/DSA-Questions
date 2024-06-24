@@ -1,0 +1,74 @@
+You are given an array ‘A’ of ‘N’ integers numbered from ‘0’ to ‘N - 1’. You are also given another binary array ‘B’ of length ‘N’ containing only ‘0s’ and ‘1s’.
+You can do the following operation at most once:
+Choose any index ‘i’ and replace the value of ‘B[i]’ to ‘(1 - B[i])’.
+The cost of this operation will be equal to ‘A[i]’.
+The beauty of an array is equal to the maximum consecutive length of ‘0s’ in the array ‘B’. You have to maximise the beauty of the array by minimising the cost.
+If there are multiple ways to maximise the beauty of the array, you have to find a way which involves the minimum cost operation.
+Your task is to tell the minimum cost to maximise the beauty of an array ‘B’ and return it.
+
+Idea : Here, we will use prefix and suffix arrays.
+In the prefix array, we will store the maximum length of zeroes ending at some index ‘i’.
+Case 1: ‘B[i]’ is ‘0’:
+Here, ‘prefix[i]’ will be equal to ‘(1 + prefix[i - 1])’.
+Case 2: ‘B[i]’ is ‘1’:
+Here, ‘prefix[i]’ will be equal to ‘0’.
+In the suffix array, we will store the maximum length of zeroes starting at index ‘i’.
+Case 1: ‘B[i]’ is ‘0’:
+Here, ‘suffix[i]’ will be equal to ‘(1 + suffix[i + 1])’.
+Case 2: ‘B[i]’ is ‘1’:
+Here, ‘suffix[i]’ will be equal to ‘0’.
+Now, for all indexes for which ‘B[i]’ is ‘1’, we will find the prefix and suffix length for those indexes and take ‘A[i]’ as the operation cost.
+
+Code :
+int minCostFlip (int n, vector <int> &a, vector <int> &b) {
+   // Write your code here.
+   vector<int> prefix(n);
+   vector<int> suffix(n);
+
+   for (int i = 0; i < n; i++){
+      if (b[i] == 1){
+         prefix[i] = 0;
+      }
+      else {
+         if (i-1 >= 0)
+            prefix[i] = 1 + prefix[i-1];
+         else
+            prefix[i] = 1;
+      }
+   }
+   for (int i = n-1; i >= 0; i--){
+      if (b[i] == 1){
+         suffix[i] = 0;
+      }
+      else {
+         if (i+1 < n)
+            suffix[i] = 1 + suffix[i+1];
+         else
+            suffix[i] = 1;
+      }
+   }
+   int maxlen = 0;
+   int cost = 0;
+
+
+   for (int i = 0; i < n; i++){
+          int prev = 0;
+         int next = 0;
+         if (i-1 >= 0){
+            prev = prefix[i-1];
+         }
+         if (i+1 < n){
+            next = suffix[i+1];
+         }
+        if (b[i] == 1) {
+            int len = 1 + prev + next;
+            if (len > maxlen) {
+                maxlen = len;
+                cost = a[i];
+            } else if (len == maxlen) {
+                cost = std::min(cost, a[i]);
+            }
+        }
+    } 
+   return cost;    
+}
