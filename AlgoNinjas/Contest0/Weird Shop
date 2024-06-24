@@ -1,0 +1,13 @@
+There are ‘N’ items in the shop. Ninja want to buy ‘K’ items. This shop has a weird rule. The price of the ‘K’ items is the maximum difference between the leftover ‘N’-’K’ items. ‘N’ - ‘K’ is at least 2 which means after buying ‘K’ items at least 2 items are left in the shop.
+Your task is to figure out the least cost possible.
+Idea : In a sorted array, to achieve the lowest price, we must remove 'K' elements either from the beginning or the end.
+This can be interpreted as finding a window of size 'N' - 'K' where the difference is minimised.
+Code :
+int minPrice(int n, int k, vector<int> &a){
+    sort(a.begin(),a.end());
+    int ans = a[n-k-1]-a[0];
+    for (int i = n-k; i < n; i++){
+        ans = min(ans,a[i]-a[i-n+k+1]);
+    }
+    return ans;
+}
