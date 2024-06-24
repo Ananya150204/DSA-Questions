@@ -1,0 +1,47 @@
+You are given an array 'A' of 'N' integers numbered from '0' to 'N - 1'.
+Let's define the alternate sum of the array 'B' of length 'X' as the value 'B[0] - B[1] + B[2] - B[3] …. B[X - 1]'.
+You are required to remove exactly one element from the array 'A' without changing the order of the remaining elements.
+Find the maximum alternate sum of the array 'A' after removing one element.
+
+Idea : Let's first find the alternate sum of the array 'A' and call it 'X'.
+Suppose we remove the element 'A[i]' from the array 'A'.
+The contribution of every element from 'A[0]' to 'A[i - 1]' in 'X' will be the same.
+The contribution of 'A[i]' will be removed from the 'X' and for each element from the index 'i + 1' to 'N - 1', the sign is reversed because of the removal of one element.
+So, if the contribution of those elements were 'C' then removing one element will contribute '-C' in the value of 'X'.
+
+Code :
+int maximumAlternateSum(int n, vector<int> &v) {
+    int suffix = 0;
+    // Calculate the alternate sum of the vector 'v' and store into 'suffix'.
+    for (int i = 0; i < n; i++){
+        if (i%2 == 0){
+            suffix = suffix + v[i];
+        }
+        else {
+            suffix = suffix - v[i];
+        }
+    }
+    int prefix = 0;
+    int ans = -1e9;
+
+      // Iterate through every element of the vector 'v'.
+    for (int i = 0; i < n; i++){
+         // Update the 'suffix' by removing the contribution of 'v[i]'.
+        if (i%2 == 0){
+            suffix = suffix - v[i];
+        }
+        else {
+            suffix = suffix + v[i];
+        }
+        ans = max(ans,prefix-suffix);
+
+         // Update 'prefix' by adding the contribution of 'v[i]'.
+        if (i%2 == 0){
+            prefix = prefix + v[i];
+        }
+        else {
+            prefix = prefix - v[i];
+        }
+    }
+    return ans;
+}
