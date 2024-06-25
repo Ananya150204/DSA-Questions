@@ -1,0 +1,24 @@
+Given an array 'A' of 'N' integers, the goal is to rearrange the elements in the array 'A' so that the magic value of the array is maximized.
+The magic value is calculated by finding the length of the longest increasing subsequence of the original array 'A' and the longest increasing subsequence of the reverse of array 'A'.
+The magic value is defined as the minimum of these two lengths. The task is to rearrange the elements in 'A' to obtain the maximum possible magic value and to print that value as the answer.
+ 
+Idea : The LIS of reverse array is equivalent to the LDS of the original array. If all the elements were
+unique, and n was odd (1,2,5,4,3) , clearly our answer is (n+1)/2. Similarly, take the case of even number
+of elements. Now consider duplicates. Realise that any count greater than 2 doesn't change the answer.
+
+Code :
+int maximizeMagicValue(int n, vector<int> a) {
+    // Write your code here.
+    unordered_map<int,int> my;
+    for (int i = 0; i < n; i++){
+        my[a[i]] = my[a[i]] + 1; 
+    }
+    // Consider 1,1,2,2,3,3,4,4,5,5
+    // Also consider 1,1,2,2,3,3,3,4,5,5
+    // 1,2,3,5,4,5,3,3,2,1 is answer to 2nd
+    int el = 0;
+    for (auto it : my){
+        el = el + min(2,it.second);
+    }
+    return (el + 1) / 2;
+}
