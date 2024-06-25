@@ -1,0 +1,86 @@
+You are given 'M' arrays, each containing 'N' integers. The 'j-th' integer in the 'i-th' array can be defined as 'A[i - 1][j - 1]'. Also, there is an empty array 'B'.
+You will perform exactly 'N' operations numbered from '0' to 'N - 1'.
+In the operation 'i', you will replace the 'A[0][i]' with some 'A[j][i]' where '0' <= 'j' <= 'M - 1'. Note that 'j' can be equal to '0' denoting no replacement. Also, you will push the integer 'j' into the array 'B'.
+Your goal is to make the first array (arrays formed by the values 'A[0][0]' to 'A[0][N - 1]') sorted in non-decreasing order.
+Return the lexicographically minimum 'B' possible after 'N' operations such that the first array is sorted in non-decreasing order or return a vector containing one value '-1' if it is impossible to make the first array sorted.
+Example:
+N = 3
+M = 2
+A = [[5, 2, 1], [1, 6, 5]]
+You can update the 'A[0][0]', 'A[0][1]' and 'A[0][2]' with values 'A[1][0]', 'A[0][1]' and 'A[1][2]' in three operations. The array 'B' for the same is ['1', '0', '1'].
+The first row of the array 'A' after performing operations is ['1', '2', '5'], which is sorted.
+It can be proved that you can not get the lexicographically smaller 'B' than ['1', '0', '1'].
+So, the answer for this case is ['1', '0', '1'].
+1 <= 'N' <= 10^3
+1 <= 'M' <= 10^3
+1 <= A[i][j] <= 10^5
+It is guaranteed that the sum of 'N * M' over all the test cases is less than or equal to '10^5'.
+
+Time limit: 1 sec
+Sample input 1:
+2
+1 3
+1 2 1
+3 3
+4 3 1
+3 2 2
+4 1 4
+Sample output 1:
+-1
+1 0 2
+Explanation of sample input 1:
+For test case 1:
+We can see that we must choose the 'j' equal to '0' in every operation. So, the resultant array is ['1', '2', '1'] which is not sorted.
+So, the answer for this case is '-1'.
+
+For test case 2:
+You can update the 'A[0][0]', 'A[0][1]' and 'A[0][2]' with values 'A[1][0]', 'A[0][1]' and 'A[2][2]' in three operations. The array 'B' for the same is ['1', '0', '2'].
+The first row of the array 'A' after performing operations is ['3', '3', '4'] which is sorted.
+It can be proved that you can not get the lexicographically smaller 'B' than ['1', '0', '2'].
+So, the answer for this case is ['1', '0', '2'].
+
+Idea :
+Let's first use dynamic programming to check for each pair ('i', 'j') if it is possible to make the subarray of the first row from indices 'j' to 'M - 1' sorted in non-decreasing order with the replacement of 'A[0][j]' by 'A[i][j]'. Let's initialize the two-dimensional array 'valid' and denote 'valid[i][j]' 'true' for this case and 'false' otherwise.
+For the pair ('i', 'j'):
+Supoose that 'nextMax' is maximum value 'A[k][j + 1]' ('0' <= 'k' <= n - 1) such that 'valid[k][j + 1]' is 'true'. We can consider it infinity for 'j' equal to 'M - 1'.
+So, 'valid[i][j]' will be 'true' if and only if 'nextMax' is greater than or equal to 'A[i][j]'.
+Now, we can apply the greedy algorithm by trying to find the minimum value of 'j' on each operation as follows:
+Suppose we want to find 'j' for operation 'i' and 'previous' is the replaced element at 'A[0][j - 1]'. We can consider 'previous' '0' for 'j' equal to '0'.
+Find the minimum 'j' such that the replacement is valid i.e., 'valid[i][j]' is 'true' and 'A[i][j]' is greater than or equal to 'previous'.
+If we get the value 'j' for each operation then the array 'B' formed is lexicographically minimum. Otherwise, the answer is '-1'.
+ 
+Code :
+vector<int> lexicographicallyMinimum(int n, int m, vector<vector<int>> &v) {
+    // Write your code here.
+    vector<vector<bool>> valid(n,vector<bool>(m,false));
+    int nextMax = INT_MAX;
+    for (int j = m-1; j >= 0; j--){
+        int currMax = 0;
+        for (int i = 0; i < n; i++){
+            if (v[i][j] <= nextMax){
+                valid[i][j] = true;
+                currMax = max(currMax,v[i][j]);
+            }
+        }
+        nextMax = currMax;
+    }
+    vector<int> ans(m);
+
+    int previous = 0;
+    for (int j = 0; j < m; j++){
+        for (int i = 0; i < n; i++){
+            if (valid[i][j] == true){
+                if (v[i][j] >= previous){
+                    ans[j] = i;
+                    previous = v[i][j];
+                    break;
+                }
+            }
+            if (i == n-1){ // valid is not true for any i,j
+                return {-1};
+            }
+        }
+        
+    }
+    return ans;
+}
