@@ -1,0 +1,6 @@
+Gfg link : https://www.geeksforgeeks.org/problems/flattening-a-linked-list/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=flattening-a-linked-list
+Idea : Apply recursion. Then merge 2 linked list (head, f(head->next)).
+Note if (dummy->bottom) {
+        dummy->bottom->next = NULL;
+    }
+in the end.
