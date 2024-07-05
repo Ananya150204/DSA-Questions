@@ -1,0 +1,8 @@
+LeetCode link : https://leetcode.com/problems/merge-k-sorted-lists/description/
+Brute : merge 2 iterative over the no. of LLs.
+Only ListNode* in priority queue : struct Compare {
+    bool operator()(ListNode* behind, ListNode* ahead) {
+        return ahead->val < behind->val;
+    }
+};
+priority_queue<ListNode*, vector<ListNode*>, Compare> candidates;
