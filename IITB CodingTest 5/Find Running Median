@@ -1,0 +1,2 @@
+https://www.hackerrank.com/contests/iitb-mock-coding-test-5/challenges/find-the-running-median/problem
+Idea : 3 4 5 6 7 8 Somehow keep 3,4,5 in order and 6,7,8 also in order (max and min). Balance sizes of heaps if req.
