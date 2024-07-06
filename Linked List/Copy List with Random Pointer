@@ -1,0 +1,4 @@
+Leetcode link : https://leetcode.com/problems/copy-list-with-random-pointer/submissions/1311302961/
+Steps : 1. Make new nodes.
+2. Copy random pointers.
+3. Copy next pointers.
