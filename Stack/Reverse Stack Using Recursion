@@ -1,0 +1,3 @@
+Code Studio Link : https://www.naukri.com/code360/problems/reverse-stack-using-recursion_631875?leftPanelTabValue=PROBLEM
+Idea : Using O(N) extra space is extremely simple. O(1) extra space as written in problem requires thinking. Tbh it is also basic. Just write
+another function insertAtBottom.
