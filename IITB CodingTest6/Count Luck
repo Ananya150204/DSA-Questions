@@ -1,0 +1,5 @@
+HackerRank : https://www.hackerrank.com/contests/iitb-mock-coding-test-6/challenges/count-luck/problem
+Idea : Parse the Grid: Read the grid dimensions and the content.
+Find Start and Portkey Positions: Identify the start ('M') and portkey ('*') positions in the grid.
+Depth-First Search (DFS) or Breadth-First Search (BFS): Implement a search algorithm to navigate from the start to the portkey while counting the decision points (cells where there is more than one possible move).
+Compare Count with 𝑘.
