@@ -1,0 +1,3 @@
+HackerRank link : https://www.hackerrank.com/contests/iitb-mock-coding-test-5/challenges/the-power-sum
+Idea : x^(1/n) would be the upper limit. Start from 1 as a possibility. No. of ways as a dp table of
+making i using nums upto j.
