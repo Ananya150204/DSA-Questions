@@ -1,0 +1,2 @@
+HackerRank link : https://www.hackerrank.com/contests/mock-coding-test-4-1/challenges/maximum-subarray-sum/problem
+Idea : Store the prefix sums in a set. Find the smallest prefix in the set that is greater than prefix
