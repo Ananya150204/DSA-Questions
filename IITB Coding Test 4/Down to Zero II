@@ -1,0 +1,5 @@
+https://www.hackerrank.com/contests/mock-coding-test-4-1/challenges/down-to-zero-ii/problem
+Idea : dp is obvious. But how ? 
+Breadth-First Search (BFS) ensures that we explore all possible moves level by level, guaranteeing that we find the minimum number of moves.
+Dynamic Programming (DP): The dp vector stores the minimum number of moves required for each number, preventing reprocessing and ensuring efficiency.
+Queue: The queue is used to manage the states to be explored, maintaining the current number and the count of moves taken to reach that number.
