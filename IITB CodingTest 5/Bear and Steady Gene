@@ -1,0 +1,2 @@
+HackerRank link : https://www.hackerrank.com/contests/iitb-mock-coding-test-5/challenges/bear-and-steady-gene/problem
+Idea : Sliding window -> The current count must exceed the excess count for all genes.
