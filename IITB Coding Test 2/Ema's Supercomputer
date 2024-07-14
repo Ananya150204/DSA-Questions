@@ -1,0 +1,7 @@
+https://www.hackerrank.com/contests/iitb-mock-coding-test-2/challenges/two-pluses/problem
+Idea : 
+Adding Border: The grid c is initialized with an additional border of 'B' characters to handle edge cases conveniently.
+Copy Grid: The original grid is copied into c starting from index 1 to n (inclusive) for rows and 1 to m (inclusive) for columns.
+Find Pluses: The function iterates over each cell, checking if it can be the center of a plus. If a plus is possible, it marks the cells of the plus as 'g'.
+Calculate Product: For each valid plus, it checks for the second plus in the remaining grid and calculates the product of their areas.
+Revert Changes: After processing, it reverts the cells back to 'G' to allow further iterations without interference.
