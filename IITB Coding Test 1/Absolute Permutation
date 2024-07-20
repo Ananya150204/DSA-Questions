@@ -1,0 +1,3 @@
+https://www.hackerrank.com/contests/iitb-2024-25-coding-test-1/challenges/absolute-permutation
+Idea : Just simple maths. If k == 0 it is obvious. If k is non-zero and n is odd it is impossible. If n is not a multiple
+of 2*k, again impossible. 
