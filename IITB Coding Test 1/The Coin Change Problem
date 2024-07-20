@@ -1,0 +1,3 @@
+https://www.hackerrank.com/contests/iitb-2024-25-coding-test-1/challenges/coin-change
+Idea : Simple 1D dp. No. of ways to make 0 is always 1. For each coin its contribution starts from the value of the coin
+to total. 
