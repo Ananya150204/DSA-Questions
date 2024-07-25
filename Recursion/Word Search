@@ -1,0 +1,2 @@
+https://leetcode.com/problems/word-search/description/
+Simple DFS. Easier to keep a var which tracks the result of all four dir, then mark vis as false and return var.
