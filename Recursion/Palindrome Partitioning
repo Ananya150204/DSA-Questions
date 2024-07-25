@@ -1,0 +1,2 @@
+https://leetcode.com/problems/palindrome-partitioning/description/
+Idea : Start from ind. Check if substr till i >= ind is palindrome. If it is, recurse for i+1.
