@@ -1,0 +1,5 @@
+https://leetcode.com/problems/minimum-deletions-to-make-string-balanced/description/
+First two approaches are in submissions. The third approach is to avoid using a vector either for count of 
+left_b or right_a.
+Watch if required
+https://youtu.be/gorAMHTwDfU?si=kY8vO42bEWtex0XS
