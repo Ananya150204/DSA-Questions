@@ -1,0 +1,3 @@
+Swap 2 numbers a and b. a = a^b; b = b^a; a = a^b.
+Remove the last set bit. N&(N-1)
+Check if N is a power of 2. N&(N-1) == 0
