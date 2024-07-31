@@ -1,0 +1,3 @@
+https://leetcode.com/problems/filling-bookcase-shelves/description/
+Honestly, memoization is not tough. Problem is with recursion itself. Keep the continuing height as a parameter and 
+return the height as well. Height when you encounter a book must be there in the parameters.
