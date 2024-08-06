@@ -1,0 +1,6 @@
+https://leetcode.com/problems/implement-stack-using-queues/description/
+In the first approach, we use two queues to maintain the order of elements. When pushing a new element, we move all elements 
+from one queue to another, then swap the names of the queues to maintain the order.
+In the follow-up approach, we use only one queue, but after pushing a new element, we rotate the queue by pushing and popping 
+elements until the newly pushed element becomes the front.
+Note that while using only 1 queue in order to rotate do push and pop for n-1 times where n is the size of the queue.
