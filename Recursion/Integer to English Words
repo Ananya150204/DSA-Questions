@@ -1,0 +1,4 @@
+https://leetcode.com/problems/integer-to-english-words/description/?envType=daily-question&envId=2024-08-07
+Handle corner cases of 0 and 10 <= i < 20. Now < 100, < 1000, ... In 95 , extract 9 and use belowHundred map. Call 
+recursion for both parts in other cases. If required, watch this.
+https://youtu.be/9FLpWWJ987w?si=_PLNQoP5It5LYGQ3
