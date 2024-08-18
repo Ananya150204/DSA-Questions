@@ -1,0 +1,5 @@
+https://leetcode.com/problems/ugly-number-ii/description/?envType=daily-question&envId=2024-08-18
+This approach naturally leads to using three pointers, one each for multiplying by 2, 3, and 5. These pointers track which 
+ugly number should be multiplied by 2, 3, and 5 next. Each time, we choose the smallest of these three possible next ugly 
+numbers, add it to our list, and move the pointer that produced this number.
+Another approach is to use min heap.  
