@@ -1,0 +1,3 @@
+https://leetcode.com/problems/maximum-number-of-points-with-cost/description/?envType=daily-question&envId=2024-08-17
+I was thinking of recursively taking m sum values where m is the number of columns but the smarter way is to consider the
+cumulative sum at every column for every row starting from i = 1 to n where n is number of rows.
