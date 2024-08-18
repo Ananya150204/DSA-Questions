@@ -1,0 +1,2 @@
+https://leetcode.com/problems/find-k-th-smallest-pair-distance/description/?envType=daily-question&envId=2024-08-14
+Binary search on required distance. Check whether for that distance the number of pairs >= k using 2 pointers.
