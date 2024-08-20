@@ -1,0 +1,4 @@
+https://leetcode.com/problems/2-keys-keyboard/description/?envType=daily-question&envId=2024-08-19
+The paste case is easy. Now when u simply copy and think that paste will take place in another operation, it will lead to an
+infinite loop. So consider this to be 2 operations and call recursion.
+https://youtu.be/zELBK8_vB7Y?si=3cbhhz5o87l1wizN
