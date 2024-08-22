@@ -6,4 +6,7 @@ Count the number of set bits in N
     N = N&(N-1)
     cnt++
   }
+No. of bits to represent a number N = (int)(log 2 N) + 1
+Create a mask of size n having all 1's = (1 << n) - 1
+
 
