@@ -1,0 +1,5 @@
+https://leetcode.com/problems/make-sum-divisible-by-p/description/?envType=daily-question&envId=2024-10-03
+
+Idea : Compute the total sum. If it is divisible by p, done. Find remainder. Try to get this remainder from the array
+(https://github.com/Ananya150204/DSA-Questions/blob/main/Arrays/Longest%20Subarray%20With%20Sum%20K) (Longest subarray
+with sum K). Get the minimum length.
