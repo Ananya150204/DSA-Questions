@@ -1,0 +1,4 @@
+https://leetcode.com/problems/divide-players-into-teams-of-equal-skill/description/?envType=daily-question&envId=2024-10-04
+Idea : One way is to look for the req skill sum as 2*(total_sum)/n. It works, solved by myself.
+Better is to note that the same skill sum is achieved by pairing the highest and the lowest, the second highest and the
+second lowest and so on.
