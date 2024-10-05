@@ -1,0 +1,4 @@
+https://leetcode.com/problems/permutation-in-string/description/?envType=daily-question&envId=2024-10-05
+Idea : Try to think in terms of a "window" of the size of the first string. Enough of a hint tbh. Easiest is to sort this
+window of the second string. Another way is to keep a vector to track the frequency of every character and shrink the 
+window appropriately.
