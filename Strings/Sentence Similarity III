@@ -1,0 +1,4 @@
+https://leetcode.com/problems/sentence-similarity-iii/description/?envType=daily-question&envId=2024-10-06
+Idea : Tokenise the strings. The simple way of iterating from the left and breaking etc fails for the test case S1 = "A" and
+S2 = "a A b A". The correct way is to keep matching from the front. When it does not match, match from the back. Finally,
+check if S2's words are all done. If not done, there is some extra word in S2 and return false.
