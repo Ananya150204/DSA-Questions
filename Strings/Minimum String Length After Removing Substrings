@@ -1,0 +1,3 @@
+https://leetcode.com/problems/minimum-string-length-after-removing-substrings/description/?envType=daily-question&envId=2024-10-07
+Idea : 1. Brute force (Implemented myself)
+2. Stack 3. One pointer for reading (j) and another for writing (i). If u find "AB" or "CD", push i backward.
