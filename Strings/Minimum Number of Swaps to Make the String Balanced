@@ -1,0 +1,3 @@
+https://leetcode.com/problems/minimum-number-of-swaps-to-make-the-string-balanced/description/?envType=daily-question&envId=2024-10-08
+Idea : Swapping unbalanced brackets can fix the string.Since 2 unbalanced parentheses are made balanced with a single swap, 
+the total number of swaps to balance are given by unbalanced / 2.
