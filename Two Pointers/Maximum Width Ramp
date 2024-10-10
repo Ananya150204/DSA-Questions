@@ -1,0 +1,3 @@
+https://leetcode.com/problems/maximum-width-ramp/description/?envType=daily-question&envId=2024-10-10
+Idea : Know the maximum value from each index to the end of the array. Given this information, we can 
+easily check if the ramp condition is satisfied for any left index while iterating from the start of the array.
