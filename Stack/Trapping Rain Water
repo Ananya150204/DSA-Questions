@@ -1,0 +1,6 @@
+https://leetcode.com/problems/trapping-rain-water/description/
+Idea : Before talking about anything else let me know of the mental barrier which makes you think that the height of water
+on a building depends on the immediate left and right neighbours of the building as this is probably the third time this has
+happened. Clearly, can be done using prefix and suffix arrays (can remove prefix array). To optimise space keep a left and 
+a right pointer. Update leftMax if arr[l] <= arr[r]. This ensures that u r always looking at the smallest among the left and
+the right.
