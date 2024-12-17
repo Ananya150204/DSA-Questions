@@ -1,0 +1,5 @@
+https://leetcode.com/problems/sum-of-subarray-minimums/description/
+Idea : I am happy that the idea about the contribution of each element struck you. I know it was a result of the Div 992C
+problem. That's a glimmer of hope and an indication that we are growing every passing day. Now what's the contri ? Just a
+hint; it continues to be the minimum on the right until it finds the next smaller element. Write a similar statement for the
+left. 
