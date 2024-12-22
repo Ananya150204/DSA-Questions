@@ -1,0 +1,3 @@
+https://leetcode.com/problems/count-paths-with-the-given-xor-value/description/
+Idea : Maintain a dp array of x,y,currSum giving the number of ways to reach n-1,m-1 from x,y with the currSum. What I did
+wrong was to not consider the currentSum.
