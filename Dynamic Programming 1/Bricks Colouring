@@ -38,3 +38,56 @@ void diwan() {
 
 This doesn't work. Why ?
 Two calls with the same i, x but different arr[index-1] should produce different answers, yet your dp[i][x] conflates them. Once you fill dp[i][x] the first time, every future call to (i,x) just returns it—even if the “previous colour” is different. That both produces the wrong count 
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long;
+static const int MOD = 1e9+7;
+
+int N, M, K;
+vector<vector<ll>> memo;
+
+ll rec(int i, int j) {
+    // Base case: we've assigned bricks [i..N-1].
+    // If i==N, there are no more gaps—succeed iff we needed exactly 0 more breaks.
+    if (i == N) 
+        return j == 0 ? 1 : 0;
+    
+    ll &ans = memo[i][j];
+    if (ans != -1) 
+        return ans;
+
+    // 1) no break at gap (i-1 -> i): colour[i] = colour[i-1] -> 1 way
+    ans = rec(i+1, j);
+
+    // 2) break at gap: colour[i] != colour[i-1] -> (M-1) choices
+    if (j > 0) {
+        ans = (ans + (ll)(M-1) * rec(i+1, j-1)) % MOD;
+    }
+
+    return ans;
+}
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int T;
+    cin >> T;
+    while (T--) {
+        cin >> N >> M >> K;
+
+        // memo[i][j] = #ways to colour bricks i..N-1
+        // with exactly j breaks among the gaps i->i+1, …, N-2->N-1
+        memo.assign(N+1, vector<ll>(K+1, -1));
+
+        // brick 0 can be any of M colours (never counts as a break),
+        // then we count exactly K breaks from brick 1 onward
+        ll answer = (ll)M * rec(1, K) % MOD;
+        cout << answer << "\n";
+    }
+    return 0;
+}
+Prefer declaring some vars global to make the func signature small in dp. Observe the use of no for loop for the (M-1) colours. Note the addition of M possible colours at the last and the "assign" function.
