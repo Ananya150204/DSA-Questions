@@ -1,0 +1,3 @@
+https://maang.in/problems/Subset-Sum-Queries-760?resourceUrl=cs70-cp476-pl3255-rs760&returnUrl=%5B%22%2Fcourses%2FDP-Workshop-Vivek-Gupta-Youtube-70%3Ftab%3Dchapters%22%5D
+
+When u print and take the item, check that left >= arr[index] before calling the recursion, otherwise negative values in the array are possible.
