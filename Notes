@@ -1,2 +1,5 @@
 abs(prow-row) == abs(pcol-col) to check for both diagonals x = y and x = -y
 int max_val = *std::max_element(v.begin(), v.end());
+void func(int n, int maxi, int dp[][101]) {
+    // Access like dp[i][j]
+}
