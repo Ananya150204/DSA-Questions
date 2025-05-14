@@ -1,0 +1,40 @@
+https://maang.in/problems/Bricks-Colouring-181?resourceUrl=cs70-cp476-pl3255-rs181&returnUrl=%5B%22%2Fcourses%2FDP-Workshop-Vivek-Gupta-Youtube-70%3Ftab%3Dchapters%22%5D
+int rec(int index, int x, int m, vector<int>& arr, int dp[][2005], int k) {
+    if (index == arr.size()) {
+        return x == k;
+    }
+    if (dp[index][x] != -1) {
+        return dp[index][x];
+    }
+    int ans = 0;
+    if (index > 0) {
+        int pcol = arr[index - 1];
+        arr[index] = pcol;
+        ans = (ans + rec(index + 1, x, m, arr, dp, k)) % MOD;
+        for (int i = 0; i < m; i++) {
+            if (pcol == i) continue;
+            arr[index] = i;
+            ans = (ans + rec(index + 1, x + 1, m, arr, dp, k)) % MOD;
+        }
+    } else {
+        for (int i = 0; i < m; i++) {
+            arr[index] = i;
+            ans = (ans + rec(index + 1, x, m, arr, dp, k)) % MOD;
+        }
+    }
+    return dp[index][x] = ans;
+}
+
+void diwan() {
+    int n, m, k;
+    cin >> n >> m >> k;
+    vector<int> arr(n, -1);
+    int dp[2005][2005];
+    // dp[i][j] => number of ways of colouring bricks[i,..,N-1] with m colours such that k-j satisfy required cond
+    memset(dp, -1, sizeof(dp));
+    int ans = rec(0, 0, m, arr, dp, k);
+    cout << ans << endl;
+}
+
+This doesn't work. Why ?
+Two calls with the same i, x but different arr[index-1] should produce different answers, yet your dp[i][x] conflates them. Once you fill dp[i][x] the first time, every future call to (i,x) just returns it—even if the “previous colour” is different. That both produces the wrong count 
