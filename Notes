@@ -3,3 +3,5 @@ int max_val = *std::max_element(v.begin(), v.end());
 void func(int n, int maxi, int dp[][101]) {
     // Access like dp[i][j]
 }
+Capital letters in ASCII 'A' = 65, 'B' = 66 ... etc.
+Small letters in ASCII 'a' = 97, 'b' = 98 ... etc.
